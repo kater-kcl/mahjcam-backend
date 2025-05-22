@@ -77,7 +77,9 @@ def user_info():
     token = request.headers.get('Authorization')
     if not token:
         return jsonify(make_response_template('Token is missing', '400004', {})), 401
-
+    if not token.lower().startswith('bearer'):
+        return jsonify(make_response_template('Invalid token format', '400004', {})), 401
+    token = token.split()[1]
     try:
         decoded = jwt.decode(token, config.jwt_sec, algorithms=['HS256'])
         username = decoded.get('username')

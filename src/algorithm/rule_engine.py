@@ -352,8 +352,7 @@ class HandMajSet:
             # 雀头是否为役牌
             if len(group) == 2:
                 tile = group[0]
-                # 假设役牌检查：三元牌（白、发、中）或场风/自风（需额外参数，此处简化处理）
-                if tile in ['Z', 'F', 'B']:  # 假设三元牌为5T=白，6T=发，7T=中
+                if tile in ['Z', 'F', 'B']:
                     fu += 2
         yaojiu_tiles = [
             '1M', '9M', '1S', '9S', '1P', '9P', 'E', 'S', 'W', 'N', 'Z', 'F', 'B'
@@ -393,7 +392,7 @@ class HandMajSet:
     # 调用之前请使用split_init
     def calc_yi(self, hidden_list, cpg_list):
         """
-        对役满进行判断：先判断天/地和，注意大四喜和小四喜使用if elif
+        对役满进行判断：
         判断完役满之后，如果满足任意役满条件则退出
         """
         yi_clac_list = []
@@ -578,7 +577,7 @@ class HandMajSet:
             yi_clac_list.append("ittsu")
 
         # 6. 三色同顺
-        chow_starts = {'M': set(), 'S': set(), 'P': set()}  # 万(M)、条(S)、筒(P)
+        chow_starts = {'M': set(), 'S': set(), 'P': set()}
 
         for group in total_list:
             if group[0] == group[1]:

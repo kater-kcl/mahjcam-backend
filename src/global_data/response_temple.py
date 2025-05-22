@@ -1,6 +1,6 @@
 def make_response_template(massage, code, content):
     res = {
-        "massage": massage,
+        "message": massage,
         "code": code,
         "content": content
     }
