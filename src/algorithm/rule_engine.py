@@ -552,13 +552,13 @@ class HandMajSet:
                 tile = group[0]
                 if tile == 'B':
                     yi_clac_list.append("yakuhai_haku")
-                elif tile == 'F':
+                if tile == 'F':
                     yi_clac_list.append("yakuhai_hatsu")
-                elif tile == 'Z':
+                if tile == 'Z':
                     yi_clac_list.append("yakuhai_chun")
-                elif tile == self.maj_data.current_round:
+                if tile == self.maj_data.current_round:
                     yi_clac_list.append("yakuhai_wind_round")
-                elif tile == self.maj_data.self_round:
+                if tile == self.maj_data.self_round:
                     yi_clac_list.append("yakuhai_wind_seat")
 
         # 5. 一气通贯
@@ -617,7 +617,6 @@ class HandMajSet:
             yi_clac_list.append('shosangen')
 
         # 12. 七对
-        print('isqidui', self.is_qidui)
         if self.is_qidui:
             yi_clac_list.append('qiedui')
 
@@ -662,6 +661,13 @@ class HandMajSet:
 
         # 将handmax以其中数组长度从大到小排序
         hand_max.sort(key=lambda x: len(x), reverse=True)
+        for group in hand_max:
+            if self.rcount['R5P'] > 0 and '5P' in group:
+                group[group.index('5P')] = 'R5P'
+            if self.rcount['R5S'] > 0 and '5S' in group:
+                group[group.index('5S')] = 'R5S'
+            if self.rcount['R5M'] > 0 and '5M' in group:
+                group[group.index('5M')] = 'R5M'
 
         res = {
             'hand_tile': hand_max,

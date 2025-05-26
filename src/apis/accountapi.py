@@ -121,6 +121,7 @@ def calc():
         'is_first_turn_win': data.get('isFirstTurnWin', False),
         'concealed_kangs': data.get('concealedKangs', 0),
     }
+    print(form_data)
     maj_set = HandMajSet(FormData(**form_data))
     info = maj_set.get_score_info()
     auth = request.headers.get('Authorization')

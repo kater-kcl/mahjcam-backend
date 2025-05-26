@@ -76,18 +76,22 @@ def cluster_maj_entity(maj_entities: List[MajEntity]) -> List[MajRect]:
             edge = PointsEdge(maj_entities[i], maj_entities[j], i, j)
             heapq.heappush(edges, edge)
 
-    while len(edges) > 0 and edges[0].lenth() < 100:
-        heapq.heappop(edges)
+    # while len(edges) > 0 and edges[0].lenth() < 100:
+    #     heapq.heappop(edges)
     if len(edges) == 0:
         return []
-    last_lenth = edges[0].lenth()
+    last_lenth = -1
     union_find = basic_unit.UnionFind(len(maj_entities))
     while len(edges) > 0:
         edge = heapq.heappop(edges)
         if union_find.connected(edge.index[0], edge.index[1]):
             continue
+        if edge.lenth() < edge.u.width * 0.8 or edge.lenth() < edge.v.width * 0.8:
+            continue
+        if last_lenth == -1:
+            last_lenth = edge.lenth()
         # 边倍率有待更改/改为可调参数
-        if edge.lenth() > last_lenth * 2:
+        if edge.lenth() > last_lenth * 3:
             break
         union_find.union(edge.index[0], edge.index[1])
     rects: dict[int, MajRect] = {}

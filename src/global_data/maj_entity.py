@@ -17,6 +17,7 @@ class MajEntity:
         self.y_max = y_max
         self.x_center = (x_min + x_max) / 2
         self.y_center = (y_min + y_max) / 2
+        self.width = min(x_max - x_min, y_max - y_min)
 
     def get_rect_index(self):
         return self.x_min, self.y_min, self.x_max, self.y_max
