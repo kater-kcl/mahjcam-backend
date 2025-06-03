@@ -249,7 +249,9 @@ class HandMajSet:
         tin_set = []
         for tile in all_majs:
             # 预处理手牌
-            temp_hand = self.hidden_set[:-1] + [tile]
+            temp_tin_set = self.hidden_set[:]
+            temp_tin_set.remove(self.end_maj)
+            temp_hand = temp_tin_set + [tile]
             temp_form_data = FormData(hand_tiles=temp_hand)
             temp_hand_maj_set = HandMajSet(temp_form_data)
             if temp_hand_maj_set.check_valid():
